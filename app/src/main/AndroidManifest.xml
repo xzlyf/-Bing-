@@ -1,22 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.xz.bing">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 系统开机广播权限 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
+        android:name=".util.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_max"
         android:label="@string/app_name"
+        android:resizeableActivity="false"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            android:label="@string/home_title">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <!-- 元数据 -->
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <!-- android:screenOrientation="portrait"竖屏模式 -->
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- 本地缓存页面 -->
+        <activity
+            android:name=".LocalPicture"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout" />
+        <!-- 图片详情页 -->
+        <activity
+            android:name=".LocalPictureDetails"
+            android:theme="@style/localTheme" />
+        <!-- 图片查看器 -->
+        <!-- 全屏样式 -->
+        <activity
+            android:name=".util.PicView"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
+            android:theme="@style/picTheme" />
+        <!-- android:screenOrientation="portrait"竖屏模式 -->
+        <!-- 设置界面 -->
+        <activity
+            android:name=".Setting"
+            android:screenOrientation="portrait" />
+        <!-- 登录界面 -->
+        <activity
+            android:name=".NetWork.Login"
+            android:theme="@style/picTheme" />
+
+        <!-- 自动更新壁纸服务 -->
+        <service
+            android:name=".service.AutoDownload"
+            android:enabled="true"
+            android:exported="true" />
+
+        <!-- 日期改变广播 -->
+        <receiver
+            android:name=".broadcast.TimeChangeReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <!-- <intent-filter> -->
+            <!-- &lt;!&ndash;接收时间改变广播&ndash;&gt; -->
+            <!-- &lt;!&ndash;<action android:name="android.intent.action.DATE_CHANGED"/>&ndash;&gt; -->
+            <!-- &lt;!&ndash;<action android:name="android.intent.action.AIRPLANE_MODE"/>&ndash;&gt; -->
+            <!-- </intent-filter> -->
+
+        </receiver>
+        <!-- 开机自启广播 -->
+        <receiver
+            android:name=".broadcast.BootReceive"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

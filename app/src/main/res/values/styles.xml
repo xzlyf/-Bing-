@@ -3,9 +3,35 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/main_tital</item>
+        <item name="colorPrimaryDark">@color/main_tital</item>
+        <item name="colorAccent">@color/main_tital</item>
     </style>
+    <!--本地图片缓存活动主题-->
+    <style name="localTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/main_tital</item>
+        <item name="colorPrimaryDark">@color/main_tital</item>
+        <item name="colorAccent">@color/main_tital</item>
+    </style>
+
+    <!--图片查看器 全屏-->
+    <style name="picTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>   
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="colorAccent">@color/main_tital</item>
+    </style>
+
+    <!--对话框圆角样式-->
+    <style name="roundDialog" parent="android:style/Theme.Dialog">
+
+        <item name="android:windowBackground">@drawable/round_dialog</item> <!-- 背景透明 -->
+        <item name="android:windowNoTitle">true</item> <!-- 没有标题 -->
+        <item name="android:backgroundDimEnabled">true</item> <!-- 背景模糊 -->
+    </style>
+
+
+
 
 </resources>

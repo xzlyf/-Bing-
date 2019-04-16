@@ -1,10 +1,5 @@
 package com.xz.bing.net;
 
-import android.util.Log;
-import android.util.Xml;
-
-import com.xz.bing.util.MyApplication;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -16,14 +11,17 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 负责软件更新
+ * 负责软件更新请求
  * 1.检查更新
  * 2.根据更新等级来强制用户更新或可跳过不更新
  *  等级：
- *      1不强制更新
- *      2强制更新，不更则退出
+ *      0不强制更新
+ *      1强制更新，不更则退出
  */
-public class Update {
+public class UpdateResquest {
+
+    private static final String UPDATE_LINK = "http://xzlyf.club/DayWallpaperUpdate/update.xml";
+
     public static void Resquest(UpdateCallbackListener callback){
 
         new Thread(new Runnable() {
@@ -35,13 +33,13 @@ public class Update {
                     //okhttp操作
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://192.168.43.204/DayWallpaperUpdateTest/Update.xml")
+                            .url(UPDATE_LINK)
+//                            .url("http://192.168.43.204/DayWallpaperUpdateTest/update.xml")
+//                            .url("http://172.20.10.3/DayWallpaperUpdateTest/update.xml")
                             .build();
                     Response response = client.newCall(request).execute();
-
                     //返回数据
                     String responseData = response.body().string();
-
                     //解析返回到的数据xml
                     parseXMLWithPull(responseData,callback);
                 } catch (IOException e) {
@@ -91,12 +89,13 @@ public class Update {
                     }
                     case XmlPullParser.END_TAG:{
                         if ("DayWallpaper".equals(nodeName)){
-//                            Log.d("Update", "parseXMLWithPull: "+level);
-//                            Log.d("Update", "parseXMLWithPull: "+name);
-//                            Log.d("Update", "parseXMLWithPull: "+code);
-//                            Log.d("Update", "parseXMLWithPull: "+msg);
+//                            Log.d("UpdateResquest", "parseXMLWithPull: "+level);
+//                            Log.d("UpdateResquest", "parseXMLWithPull: "+name);
+//                            Log.d("UpdateResquest", "parseXMLWithPull: "+code);
+//                            Log.d("UpdateResquest", "parseXMLWithPull: "+msg);
 
-//                            callback.finish(level,name,code,msg);
+                            //回调获取到的版本信息
+                            callback.finish(level,name,code,msg,link);
                         }
                     }
                     default:
@@ -106,6 +105,8 @@ public class Update {
             }
         }catch (Exception e){
             e.printStackTrace();
+            //回调错误信息
+            callback.error(e);
         }
 
     }

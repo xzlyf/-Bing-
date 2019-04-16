@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+<!--每个group加上Id才显示分割线-->
+    <group
+        android:id="@+id/group_1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/local_pic"
+            android:title="本地图片" />
+    </group>
+
+    <group
+        android:id="@+id/group_2"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/setting_nav_item"
-            android:title="设置"
-            />
+            android:title="设置" />
+        <item
+            android:id="@+id/about_nav_item"
+            android:title="关于" />
     </group>
 </menu>

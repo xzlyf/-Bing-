@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NetWork.Login">
+    tools:context=".NetWork.Login"
+    android:background="#faf4c5">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login_tips"
+        android:layout_above="@id/login_msg"
+        android:layout_centerInParent="true"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/login_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="18sp"
+        android:text="[每日壁纸]社区已在建设中"/>
+    <TextView
+        android:id="@+id/login_msg2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="评论|收藏|好友|分享"
+        android:layout_below="@+id/login_msg"
+        android:layout_centerInParent="true"/>
+    <TextView
+        android:id="@+id/login_msg3"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="即将开启新纪元"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/login_msg2"
+        android:layout_centerInParent="true"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/login_back"
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/back"
+        android:layout_below="@+id/login_msg3"
+        android:layout_centerInParent="true"
+        app:elevation="1dp"
+        />
+</RelativeLayout>

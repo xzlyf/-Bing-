@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    >
+
+    <!--动态声明了样式不用在着声明了-->
+    <!--android:background="@drawable/round_dialog"-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="需要以下权限"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#313131"/>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="#存储文件"/>
+        <View
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#c7c7c7"/>
+        <Button
+            android:id="@+id/get_permission"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/ok_button"
+            android:text="一键获取"/>
+    </LinearLayout>
+
+</RelativeLayout>

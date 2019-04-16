@@ -3,4 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="main_tital">#f1c40f</color>
+
+    <!--对话框背景颜色-->
+    <color name="dialog_background">#f9f4e4</color>
+    
+    <!--白色-->
+    <color name="white_main">#ffffff</color>
+
 </resources>

@@ -1,6 +1,25 @@
 <resources>
-    <string name="app_name">每日bing壁纸</string>
+    <string name="app_name">每日壁纸</string>
     <string name="home_title">主页</string>
     <string name="about_name">关于</string>
     <string name="exit_name">退出</string>
+
+
+    <string name="share_error">壁纸未加载完成不可进行分享操作</string>
+    <string name="share_msg">我在“每日壁纸”中觉得这图片很不错，分享给你哟！</string>
+    <string name="share_title">分享至</string>
+
+    <string name="msg_title">当前网络异常</string>
+    <string name="msg_message">今日壁纸未缓存,网络通畅后自动缓存哦！</string>
+    <string name="title_activity_login">登录</string>
+
+
+    <string name="about_title">关于[每日壁纸]</string>
+    <string name="about_msg_1">此软件无壁纸的任何版权，只负责转载，不存在商业利益</string>
+    <string name="about_msg_2">此软件图片来源[www.bing.com]每日一更</string>
+    <string name="about_msg_3">软件项目为开源，欢迎有兴趣者补充！</string>
+    <string name="about_msg_4">GitHub:https://github.com/xzlyf/-Bing-</string>
+    <string name="about_author">\@Xzlyf</string>
+
+
 </resources>

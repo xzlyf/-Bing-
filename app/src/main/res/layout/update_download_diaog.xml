@@ -28,11 +28,28 @@
             style="?android:progressBarStyleHorizontal"
             android:max="100"
             />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/net_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="0kb/s"/>
+            <TextView
+                android:id="@+id/downloadbar_tips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="0%"/>
+        </FrameLayout>
         <TextView
             android:id="@+id/update_cancel_download"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="取消下载"
+            android:text="最小化"
             android:textColor="#0e65df"
             android:layout_gravity="end"
             android:layout_marginTop="20dp"/>

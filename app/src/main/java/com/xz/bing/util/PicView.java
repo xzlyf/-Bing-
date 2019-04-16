@@ -1,26 +1,20 @@
-package com.xz.bing;
+package com.xz.bing.util;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.xz.bing.util.MyApplication;
+import com.xz.bing.R;
 
-import java.io.File;
-
+import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 import uk.co.senab.photoview.PhotoView;
 
 /**
  * 图片查看器
  * 负责整个软件的图片查看
+ * 传入imagePath路径
  */
-public class PicView extends AppCompatActivity {
+public class PicView extends SwipeBackActivity {
 
     private PhotoView photoView;
 
@@ -29,7 +23,7 @@ public class PicView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pic_view);
         //获取Id
-        photoView = findViewById(R.id.pic_view);
+        photoView = (PhotoView) findViewById(R.id.pic_view);
         //获取传入数据
         String dir = getIntent().getStringExtra("imagePath");
 
@@ -42,5 +36,13 @@ public class PicView extends AppCompatActivity {
                 .into(photoView);
 
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //优化内存
+        photoView.setImageDrawable(null);
+        photoView = null;
     }
 }

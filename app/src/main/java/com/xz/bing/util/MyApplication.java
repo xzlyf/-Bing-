@@ -1,4 +1,4 @@
-package com.xz.bing;
+package com.xz.bing.util;
 
 import android.app.Application;
 import android.content.Context;
