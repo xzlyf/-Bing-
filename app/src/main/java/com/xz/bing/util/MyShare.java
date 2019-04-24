@@ -3,6 +3,8 @@ package com.xz.bing.util;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.v4.content.FileProvider;
 
 import com.xz.bing.R;
 
@@ -28,9 +30,26 @@ public class MyShare {
          * intent.putExtra(Intent.EXTRA_STREAM,uri);
          */
         //执行分享操作
+//        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+//        shareIntent.setType("image/*");
+//        Uri uri = Uri.fromFile(file);
+//        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+//        shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.share_title);
+//        shareIntent.putExtra(Intent.EXTRA_TEXT, R.string.share_msg);
+//        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        context.startActivity(Intent.createChooser(shareIntent, title));
+
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/*");
-        Uri uri = Uri.fromFile(file);
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= 24) {//大于7.0使用此方法
+            uri = FileProvider.getUriForFile(
+                    context,
+                    context.getPackageName()+".fileprovider",
+                    file);
+        }else{
+            uri = Uri.fromFile(file);
+        }
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, R.string.share_title);
         shareIntent.putExtra(Intent.EXTRA_TEXT, R.string.share_msg);

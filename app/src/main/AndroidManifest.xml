@@ -95,6 +95,8 @@
             </intent-filter>
         </receiver>
 
+        <!-- 推荐给好友界面 -->
+        <activity android:name=".ShareMyself" />
     </application>
 
 </manifest>

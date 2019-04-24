@@ -2,6 +2,7 @@ package com.xz.bing.net;
 
 import android.app.Dialog;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.support.v4.content.FileProvider;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.xz.bing.R;
 import com.xz.bing.util.MyApplication;
@@ -71,7 +73,6 @@ public class UpdateDownloadTask extends AsyncTask<String, Integer, Boolean> {
             dialog.dismiss();
 
 
-
             //打开apk安装器  ，因为7.0以上系统安装有点区别，所以这段代码是仿写别人的
 //            作者：chxy_s
 //            来源：CSDN
@@ -82,11 +83,16 @@ public class UpdateDownloadTask extends AsyncTask<String, Integer, Boolean> {
             File file = new File(filePath);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             if (Build.VERSION.SDK_INT >= 24) {//大于7.0使用此方法
-                Uri apkUri = FileProvider.getUriForFile(context, "com.xz.bing.fileprovider", file);///-----ide文件提供者名
-
-                //添加这一句表示对目标应用临时授权该Uri所代表的文件
+//                Uri apkUri = FileProvider.getUriForFile(context, "com.xz.bing.fileprovider", file);///-----ide文件提供者名
+//
+//                //添加这一句表示对目标应用临时授权该Uri所代表的文件
+//                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//                intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+                Uri contentUri = FileProvider.getUriForFile(context,
+                        context.getPackageName() + ".fileprovider", file);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+                intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
             } else {//小于7.0就简单了
                 // 由于没有在Activity环境下启动Activity,设置下面的标签
                 intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
@@ -96,16 +102,34 @@ public class UpdateDownloadTask extends AsyncTask<String, Integer, Boolean> {
 
             //弹出通知
             NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-            Notification notification = new NotificationCompat.Builder(context, "default")
-                    .setContentTitle("下载成功")
-                    .setContentText("已下载最新 [每日壁纸]安装包,点击安装吧！")
-                    .setWhen(System.currentTimeMillis())
-                    .setSmallIcon(R.drawable.logo)
-                    .setDefaults(NotificationCompat.DEFAULT_ALL)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                    .setAutoCancel(true)
-                    .setContentIntent(pi)
-                    .build();
+            Notification notification = null;
+            //如果版本大于安卓8.0  解决通知不显示
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                Toast.makeText(context,"下载完成，下拉通知栏点击进入安装",Toast.LENGTH_SHORT).show();
+                NotificationChannel mChannel = new NotificationChannel("change_1", "每日壁纸", NotificationManager.IMPORTANCE_LOW);
+                manager.createNotificationChannel(mChannel);
+                notification = new Notification.Builder(context)
+                        .setChannelId("change_1")
+                        .setContentTitle("下载成功")
+                        .setSmallIcon(R.drawable.logo_max)
+                        .setAutoCancel(true)
+                        .setContentIntent(pi)
+                        .setContentText("已下载最新 [每日壁纸]安装包,点击安装吧！")
+                        .setSmallIcon(R.mipmap.ic_launcher).build();
+
+            }else{
+                notification = new NotificationCompat.Builder(context, "default")
+                        .setContentTitle("下载成功")
+                        .setContentText("已下载最新 [每日壁纸]安装包,点击安装吧！")
+                        .setWhen(System.currentTimeMillis())
+                        .setSmallIcon(R.drawable.logo_max)
+                        .setDefaults(NotificationCompat.DEFAULT_ALL)
+                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                        .setAutoCancel(true)
+                        .setContentIntent(pi)
+                        .build();
+            }
+
 
             manager.notify(1, notification);
 
@@ -118,7 +142,7 @@ public class UpdateDownloadTask extends AsyncTask<String, Integer, Boolean> {
                     .setContentTitle("下载失败")
                     .setContentText("当前网络异常，请重试哦！")
                     .setWhen(System.currentTimeMillis())
-                    .setSmallIcon(R.drawable.logo)
+                    .setSmallIcon(R.drawable.logo_max)
                     .setDefaults(NotificationCompat.DEFAULT_ALL)
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .build();

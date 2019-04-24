@@ -95,7 +95,7 @@ public class TimeChangeReceiver extends BroadcastReceiver {
                 .setContentTitle("每日壁纸")
                 .setContentText("当天壁纸下载失败")
                 .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.logo)
+                .setSmallIcon(R.drawable.logo_max)
                 .setAutoCancel(true)
                 .build();
 
@@ -116,7 +116,7 @@ public class TimeChangeReceiver extends BroadcastReceiver {
                 .setContentTitle("每日壁纸")
                 .setContentText("已完成"+DateFormat.Today()+"壁纸缓存")
                 .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.logo)
+                .setSmallIcon(R.drawable.logo_max)
                 .setAutoCancel(true)
                 .setContentIntent(p1)
                 .build();

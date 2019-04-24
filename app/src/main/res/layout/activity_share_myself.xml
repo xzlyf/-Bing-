@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShareMyself"
+    android:background="?attr/colorPrimary">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="感谢您的分享"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_above="@+id/share_myself_qr_code"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp"/>
+
+    <ImageView
+        android:id="@+id/share_myself_qr_code"
+        android:layout_centerInParent="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/qr_code"/>
+
+    <!--style="?android:attr/borderlessButtonStyle" 取消按钮阴影-->
+    <Button
+        android:id="@+id/share_link"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:layout_below="@+id/share_myself_qr_code"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/share_button"
+        android:textSize="18sp"
+        android:textColor="@color/white_main"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="复制链接"/>
+
+</RelativeLayout>

@@ -19,7 +19,9 @@
     <string name="about_msg_2">此软件图片来源[www.bing.com]每日一更</string>
     <string name="about_msg_3">软件项目为开源，欢迎有兴趣者补充！</string>
     <string name="about_msg_4">GitHub:https://github.com/xzlyf/-Bing-</string>
-    <string name="about_author">\@Xzlyf</string>
+    <string name="about_author">开发者：\@Xzlyf</string>
+    <string name="contact">\t非常感谢下载体验，如果您在使用中发现漏洞或有何建议，随时欢迎联系我！\n邮箱： czr2001@outlook.com</string>
+    <string name="email">CZR2001@outlook.com</string>
 
 
 </resources>

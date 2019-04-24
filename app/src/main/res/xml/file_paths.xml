@@ -2,5 +2,6 @@
 <resources>
     <!--<external-files-path path="/temp" name="download"/>-->
     <external-files-path path="." name="apk_file"/>
-    <!--</paths>-->
+    <external-files-path path="image" name="external-files-path"/>
+
 </resources>

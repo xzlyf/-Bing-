@@ -2,6 +2,7 @@ package com.xz.bing;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -236,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             //让标题栏显示滑动菜单的按钮显出来
             actionBar.setDisplayHomeAsUpEnabled(true);
-//            actionBar.setHomeAsUpIndicator();//设置图标
+            actionBar.setHomeAsUpIndicator(R.drawable.menu);//设置图标
         }
         //初始化对象
         mainImage = findViewById(R.id.main_image);
@@ -569,6 +570,14 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     }
+                    case R.id.share_my_friend_nav:
+                        //推荐给好友
+                        startActivity(new Intent(MainActivity.this,ShareMyself.class));
+                        break;
+
+                    case R.id.contact_us_nav:
+                        showContactAsDialog();
+                        break;
                     case R.id.local_pic: {
                         Intent intent = new Intent(MainActivity.this, LocalPicture.class);
                         startActivity(intent);
@@ -809,6 +818,22 @@ public class MainActivity extends AppCompatActivity {
         Window window = dialog.getWindow();
         window.setContentView(R.layout.about_dialog);
         window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    }
+    private void showContactAsDialog(){
+        Dialog dialog = new AlertDialog.Builder(MainActivity.this).create();
+        dialog.show();
+        Window window = dialog.getWindow();
+        window.setContentView(R.layout.contact_dialog);
+        window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        Button getEmail = window.findViewById(R.id.get_email_string);
+        getEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClipboardManager clip = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                clip.setText(getString(R.string.email));
+                Toast.makeText(MainActivity.this,"已复制邮箱地址",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 
