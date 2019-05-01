@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.transition.Slide;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,6 +63,9 @@ public class LocalPicture extends SwipeBackActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local_picture);
+        getWindow().setEnterTransition(new Slide().setDuration(300));
+        getWindow().setExitTransition(new Slide().setDuration(300));
+
         //设置toolbar为默认标题栏
         android.support.v7.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_local_pic);
         setSupportActionBar(toolbar);

@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="main_tital">#f1c40f</color>
+    <color name="dark_main">#edd97b</color>
 
     <!--对话框背景颜色-->
     <color name="dialog_background">#f9f4e4</color>

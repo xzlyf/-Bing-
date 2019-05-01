@@ -41,7 +41,6 @@ public class UpdateDownloadTask extends AsyncTask<String, Integer, Boolean> {
     private Dialog dialog;
 
 
-
     public UpdateDownloadTask(String link, ProgressBar downloadBar, TextView tips, Dialog dialog) {
         this.link = link;
         this.downloadBar = downloadBar;
@@ -58,7 +57,6 @@ public class UpdateDownloadTask extends AsyncTask<String, Integer, Boolean> {
 
 
     }
-
 
 
     /**
@@ -104,21 +102,22 @@ public class UpdateDownloadTask extends AsyncTask<String, Integer, Boolean> {
             NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             Notification notification = null;
             //如果版本大于安卓8.0  解决通知不显示
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                Toast.makeText(context,"下载完成，下拉通知栏点击进入安装",Toast.LENGTH_SHORT).show();
-                NotificationChannel mChannel = new NotificationChannel("change_1", "每日壁纸", NotificationManager.IMPORTANCE_LOW);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                Toast.makeText(context, "下载完成，下拉通知栏点击进入安装", Toast.LENGTH_SHORT).show();
+                NotificationChannel mChannel = new NotificationChannel("installApk", "每日壁纸", NotificationManager.IMPORTANCE_HIGH);
+                mChannel.enableVibration(true);//开启震动
                 manager.createNotificationChannel(mChannel);
-                notification = new Notification.Builder(context)
+                notification = new Notification.Builder(context, "installApk")
                         .setChannelId("change_1")
                         .setContentTitle("下载成功")
                         .setSmallIcon(R.drawable.logo_max)
                         .setAutoCancel(true)
                         .setContentIntent(pi)
                         .setContentText("已下载最新 [每日壁纸]安装包,点击安装吧！")
-                        .setSmallIcon(R.mipmap.ic_launcher).build();
+                        .build();
 
-            }else{
-                notification = new NotificationCompat.Builder(context, "default")
+            } else {
+                notification = new NotificationCompat.Builder(context, "installApk")
                         .setContentTitle("下载成功")
                         .setContentText("已下载最新 [每日壁纸]安装包,点击安装吧！")
                         .setWhen(System.currentTimeMillis())

@@ -1,6 +1,6 @@
 package com.xz.bing;
 
-import android.Manifest;
+import android.app.ActivityOptions;
 import android.app.Dialog;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -14,7 +14,6 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,14 +22,13 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Slide;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -198,32 +196,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /**
-     * 权限回调事件
-     *
-     * @param requestCode
-     * @param permissions
-     * @param grantResults
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 1:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                } else {
-                    Toast.makeText(MainActivity.this, "权限不足，无法运行", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //进场动画
+//        getWindow().setEnterTransition(new Fade().setDuration(1000));
+//        getWindow().setEnterTransition(new Explode().setDuration(1000));
+        getWindow().setEnterTransition(new Slide().setDuration(500));
 
         //设置toolbar为默认标题栏
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar);
@@ -433,8 +415,7 @@ public class MainActivity extends AppCompatActivity {
      * 检测是否第一次运行
      */
     private void isFirstRun() {
-        //android 6.0以上获取运行时权限
-        getpermission();
+
 
         SharedPreferences preferences = getSharedPreferences("isFirst", 0);
         //默认是没有这个值，那就是找不到就给个默认值为true表示第一次运行
@@ -447,44 +428,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 获取运行时权限
-     */
-    private void getpermission() {
-        if(Build.VERSION.SDK_INT>23){
-            //申请读写权限
-            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                //显示对话框
-                showGetRuntimePermission();
 
-            }
-        }
-    }
 
-    /**
-     * 显示引导用户获取权限的对话框
-     */
-    private void showGetRuntimePermission() {
-        //对话框指定样式
-        Dialog guidePermission = new AlertDialog.Builder(
-                MainActivity.this,R.style.roundDialog).create();
-        guidePermission.setCancelable(false);
-        guidePermission.show();
-        Window window = guidePermission.getWindow();
-        window.setContentView(R.layout.guide_permisson_dialog);
-        window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        Button getPermissionButton = window.findViewById(R.id.get_permission);
-        getPermissionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //没有权限则申请权限
-                ActivityCompat.requestPermissions(MainActivity.this
-                        , new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                guidePermission.dismiss();
-            }
-        });
-    }
+
 
 
     /**
@@ -561,7 +507,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.setting_nav_item: {
                         Intent intent = new Intent(MainActivity.this, Setting.class);
                         intent.putExtra("local_path", getExternalFilesDir("image").toString());
-                        startActivity(intent);
+                        //带动画效果启动活动
+                        startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
 //                        startActivity(new Intent(MainActivity.this, Setting.class));
                     }
                     break;
@@ -579,8 +526,9 @@ public class MainActivity extends AppCompatActivity {
                         showContactAsDialog();
                         break;
                     case R.id.local_pic: {
-                        Intent intent = new Intent(MainActivity.this, LocalPicture.class);
-                        startActivity(intent);
+                        startActivity(
+                                new Intent(MainActivity.this, LocalPicture.class)
+                                ,ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
 
 
                     }
@@ -764,7 +712,6 @@ public class MainActivity extends AppCompatActivity {
                     //设置布局背景为空白
                     layout.setBackground(null);
                 }
-
 
 
                 //使用Glide加载图片

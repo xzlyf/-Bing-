@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
+import android.transition.Fade;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,7 +107,9 @@ public class Setting extends SwipeBackActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-
+        //进退场动画
+        getWindow().setEnterTransition(new Fade().setDuration(500));
+        getWindow().setExitTransition(new Fade().setDuration(500));
         //设置toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.setting_toolbar);
         setSupportActionBar(toolbar);
