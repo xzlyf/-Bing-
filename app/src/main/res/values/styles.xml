@@ -30,6 +30,13 @@
         <item name="android:backgroundDimEnabled">true</item> <!-- 背景模糊 -->
     </style>
 
+    <!--家族软件主题-->
+    <style name="FamilyTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/FamilyActivity</item>
+        <item name="colorPrimaryDark">@color/FamilyActivity</item>
+        <item name="colorAccent">@color/FamilyActivity</item>
+    </style>
 
 
 

@@ -13,4 +13,5 @@
     <!--白色-->
     <color name="white_main">#ffffff</color>
 
+    <color name="FamilyActivity">#00BCD4</color>
 </resources>

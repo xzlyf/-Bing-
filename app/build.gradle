@@ -14,8 +14,8 @@ android {
         applicationId "com.xz.bing"
         minSdkVersion 22
         targetSdkVersion 27
-        versionCode 14
-        versionName "1.5.6"
+        versionCode 15
+        versionName "1.5.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -51,4 +51,5 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.chrisbanes.photoview:library:1.2.4'
     implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
+   
 }

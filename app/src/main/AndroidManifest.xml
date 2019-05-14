@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <!-- 系统开机广播权限 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <!--安卓8.0打开apk安装更新-->
+    <!-- 安卓8.0打开apk安装更新 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
@@ -34,7 +34,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <!--启动页-->
+        <!-- 启动页 -->
         <activity android:name=".Start">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,13 +42,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--主页-->
+        <!-- 主页 -->
         <!-- android:screenOrientation="portrait"竖屏模式 -->
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <!-- 本地缓存页面 -->
         <activity
             android:name=".LocalPicture"
@@ -104,7 +102,9 @@
 
         <!-- 推荐给好友界面 -->
         <activity android:name=".ShareMyself" />
-
+        <!--家族软件界面-->
+        <activity android:name=".FamilyAPP"
+            android:theme="@style/FamilyTheme"/>
     </application>
 
 </manifest>

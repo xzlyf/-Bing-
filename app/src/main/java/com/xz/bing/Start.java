@@ -29,6 +29,7 @@ public class Start extends AppCompatActivity {
     //时长 -秒 多久自动跳过
     private int time = 4;
     private boolean isRun = true;
+    private final static String TAG = "Start";
 
 
     //更新ui
@@ -37,6 +38,8 @@ public class Start extends AppCompatActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case TIMECODE:
+                    Log.d(TAG, "onCreate: c");
+
                     time--;
                     skipText.setText(time + "跳过");
 
@@ -48,7 +51,7 @@ public class Start extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
+        Log.d(TAG, "onCreate: a");
         skipText = findViewById(R.id.skip_text);
         skipText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,10 +73,13 @@ public class Start extends AppCompatActivity {
      * 倒计时多少秒进入主页
      */
     private void countTime() {
+        Log.d(TAG, "onCreate: a+");
+
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (isRun) {
+                    Log.d(TAG, "onCreate: b");
 
                     Message message = new Message();
                     message.what = TIMECODE;
@@ -170,7 +176,7 @@ public class Start extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-
+                    Log.d(TAG, "run: ui");
                     //有转场动画
                     startActivity(
                             new Intent(Start.this, MainActivity.class)

@@ -517,6 +517,10 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     }
+                    //家族软件
+                    case R.id.family_app:
+                        startActivity(new Intent(MainActivity.this,FamilyAPP.class));
+                        break;
                     case R.id.share_my_friend_nav:
                         //推荐给好友
                         startActivity(new Intent(MainActivity.this,ShareMyself.class));

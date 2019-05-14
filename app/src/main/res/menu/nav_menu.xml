@@ -14,6 +14,10 @@
             android:icon="@drawable/setting"
             android:title="设置" />
         <item
+            android:id="@+id/family_app"
+            android:icon="@drawable/family_icon"
+            android:title="家族APP"/>
+        <item
             android:id="@+id/share_my_friend_nav"
             android:icon="@drawable/sharemyselt"
             android:title="推荐给好友" />
