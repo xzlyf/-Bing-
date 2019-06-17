@@ -24,7 +24,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            signingConfig signingConfigs.config
         }
     }
     //指定jdk版本
@@ -51,5 +50,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.github.chrisbanes.photoview:library:1.2.4'
     implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
-   
+    //强大的工具库
+    implementation 'com.blankj:utilcode:1.24.2'
+    implementation 'com.orhanobut:logger:2.2.0'
 }

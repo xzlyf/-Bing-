@@ -20,7 +20,9 @@ import okhttp3.Response;
  */
 public class UpdateResquest {
 
-    private static final String UPDATE_LINK = "http://xzlyf.club/DayWallpaperUpdate/update.xml";
+//    private static final String UPDATE_LINK = "http://xzlyf.club/DayWallpaperUpdate/update.xml";
+    //检查更新服务器
+    private static final String UPDATE_LINK = "https://xzlyf.github.io/DayWallpaperUpdate/update.xml";
 
     public static void Resquest(UpdateCallbackListener callback){
 
@@ -34,8 +36,6 @@ public class UpdateResquest {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
                             .url(UPDATE_LINK)
-//                            .url("http://192.168.43.204/DayWallpaperUpdateTest/update.xml")
-//                            .url("http://172.20.10.3/DayWallpaperUpdateTest/update.xml")
                             .build();
                     Response response = client.newCall(request).execute();
                     //返回数据
@@ -89,10 +89,6 @@ public class UpdateResquest {
                     }
                     case XmlPullParser.END_TAG:{
                         if ("DayWallpaper".equals(nodeName)){
-//                            Log.d("UpdateResquest", "parseXMLWithPull: "+level);
-//                            Log.d("UpdateResquest", "parseXMLWithPull: "+name);
-//                            Log.d("UpdateResquest", "parseXMLWithPull: "+code);
-//                            Log.d("UpdateResquest", "parseXMLWithPull: "+msg);
 
                             //回调获取到的版本信息
                             callback.finish(level,name,code,msg,link);
