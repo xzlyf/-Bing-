@@ -107,7 +107,7 @@ public class Start extends AppCompatActivity {
      * 获取运行时权限
      */
     private void getpermission() {
-        if (Build.VERSION.SDK_INT > 23) {
+        if (Build.VERSION.SDK_INT >= 23) {
             //申请读写权限
             if (ContextCompat.checkSelfPermission(Start.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
@@ -118,6 +118,9 @@ public class Start extends AppCompatActivity {
                 //倒计时进入主页
                 countTime();
             }
+        }else{
+            countTime();
+
         }
     }
 

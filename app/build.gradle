@@ -1,14 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'xzlyfDayWallpaper'
-            keyPassword 'xzlyf297'
-            storeFile file('C:/Users/xz/Desktop/每日壁纸项目/xzlyf.jks')
-            storePassword 'czr010514'
-        }
-    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.xz.bing"
@@ -22,9 +14,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-        debug {
-            signingConfig signingConfigs.config
         }
     }
     //指定jdk版本
